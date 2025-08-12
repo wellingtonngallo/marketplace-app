@@ -8,19 +8,34 @@ export default defineConfig({
     react(),
     tailwind(),
     federation({
+      name: 'marketplace-host',
+      filename: 'remoteEntry.js',
       remotes: {
-        header: `http://localhost:5001/assets/remoteEntry.js`,
-        cards: `http://localhost:5003/assets/remoteEntry.js`,
+        'marketplace-host': 'http://localhost:5000/assets/remoteEntry.js',
+        header: 'http://localhost:5001/assets/remoteEntry.js',
+        cards:  'http://localhost:5003/assets/remoteEntry.js',
       },
-      shared: ['react', 'react-dom', 'flowbite-react', 'flowbite'],
-    }),
+      exposes: {
+        './context': './src/context/remote.ts',
+      },
+      shared: ['react','react-dom'],
+    })
   ],
   server: {
     port: 5000,
-    fs: {
-      allow: [
-        '..',
-      ],
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
     },
+  },
+  preview: {
+    port: 5000,
+    strictPort: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  },
+  build: {
+    sourcemap: true,
   },
 })

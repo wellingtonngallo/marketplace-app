@@ -8,15 +8,18 @@ export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
+    flowbiteReact(),
     federation({
       name: "cards",
       filename: "remoteEntry.js",
+      remotes: {
+        'marketplace-host': "http://localhost:5000/assets/remoteEntry.js"
+      },
       exposes: {
         "./ProductsList": "./src/pages/ProductsList/ProductsList.tsx",
       },
       shared: ["react", "react-dom"],
     }),
-    flowbiteReact(),
   ],
   server: {
     port: 5003,
@@ -38,5 +41,12 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
     modulePreload: false,
+    rollupOptions: {
+      external: ['marketplace-host/context'],
+    },
+    sourcemap: true,
   },
+  optimizeDeps: {
+    exclude: ['marketplace-host/context'],
+  }
 });

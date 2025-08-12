@@ -12,6 +12,9 @@ export default defineConfig({
     federation({
       name: "header",
       filename: "remoteEntry.js",
+      remotes: {
+        'marketplace-host': 'http://localhost:5000/assets/remoteEntry.js',
+      },
       exposes: {
         "./Header": "./src/components/Header/Header.tsx",
       },
@@ -38,5 +41,12 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
     modulePreload: false,
+    rollupOptions: {
+      external: ['marketplace-host/context'],
+    },
+    sourcemap: true,
   },
+  optimizeDeps: {
+    exclude: ['marketplace-host/context'],
+  }
 });

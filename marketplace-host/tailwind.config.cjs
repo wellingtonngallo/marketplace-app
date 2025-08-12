@@ -8,8 +8,6 @@ module.exports = {
     '../header-app/src/**/*.{js,ts,jsx,tsx}',
     '../cards-app/index.html',
     '../cards-app/src/**/*.{js,ts,jsx,tsx}',
-    '../footer-app/index.html',
-    '../footer-app/src/**/*.{js,ts,jsx,tsx}',
     './node_modules/flowbite-react/lib/esm/**/*.js',
     './node_modules/flowbite/**/*.js',
   ],

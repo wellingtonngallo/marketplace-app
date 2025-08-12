@@ -27,6 +27,7 @@ export const ProductsListView = ({
         {products.map((product: Product) => (
           <ProductCard
             key={product.id}
+            id={product.id}
             name={product.title}
             price={product.price}
             rating={product.rating ?? 0}

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev:all": "concurrently \"npm run start-mf --prefix header-app\" \"npm run start-mf --prefix cards-app\" \"wait-on http://localhost:5001/assets/remoteEntry.js && wait-on http://localhost:5003/assets/remoteEntry.js && npm run dev --prefix marketplace-host\""
+    "predev:ports": "lsof -ti :5001 -sTCP:LISTEN | xargs kill -9 2>/dev/null || true; lsof -ti :5003 -sTCP:LISTEN | xargs kill -9 2>/dev/null || true; lsof -ti :5000 -sTCP:LISTEN | xargs kill -9 2>/dev/null || true",
+    "dev:all": "npm run predev:ports && concurrently -k \"npm run start-mf --prefix header-app\" \"npm run start-mf --prefix cards-app\" \"wait-on http://localhost:5001/assets/remoteEntry.js http://localhost:5003/assets/remoteEntry.js && npm run preview --prefix marketplace-host -- --port 5000 --strictPort\""
   },
   "keywords": [],
   "author": "",
