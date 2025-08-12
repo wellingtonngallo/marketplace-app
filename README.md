@@ -42,3 +42,14 @@ npm run start-mf --prefix header-app
 npm run start-mf --prefix cards-app
 # (executa build + preview em 5003)
 ```
+
+## Tecnologias
+- React 18 + TypeScript 5
+- Vite 7
+- Module Federation: `@originjs/vite-plugin-federation`
+- Tailwind CSS 4 (com `@tailwindcss/vite`)
+- Flowbite + Flowbite React (componentes UI)
+- TanStack React Query (cache/estado de dados assíncronos)
+- Lucide React (ícones)
+- ESLint/Biome (lint/format)
+- Scripts de orquestração: `concurrently`, `wait-on`
